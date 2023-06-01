@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "raycaster"
+version = "0.1.0"
+description = ""
+authors = ["Wyatt <wyattf@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pygame = "^2.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+# skip unused variables
+ignore = ["F841"]
