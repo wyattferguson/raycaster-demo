@@ -24,8 +24,10 @@ class Game():
             self.board.blank()
             self.board.draw()
             self.keyboard()
+            self.player.move()
             self.player.draw()
-            self.update()
+            pg.display.update()
+            self.clock.tick(FPS)
 
         pg.quit()
 
@@ -33,20 +35,6 @@ class Game():
         for event in pg.event.get():
             if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.running = False
-            elif event.type == pg.KEYDOWN:
-                if event.key==pg.K_w:
-                    self.player.move(UP)
-                elif event.key==pg.K_a:
-                    self.player.move(LEFT)
-                elif event.key==pg.K_d:
-                    self.player.move(RIGHT)
-                elif event.key==pg.K_s:
-                    self.player.move(DOWN)
-
-
-    def update(self):
-        pg.display.update()
-        self.clock.tick(FPS)
 
 
 if __name__ == "__main__":

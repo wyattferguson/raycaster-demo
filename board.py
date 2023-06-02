@@ -24,13 +24,12 @@ class Board():
         for y, row in enumerate(self.map):
             for x, tile in enumerate(row):
                 if tile:
-                    self.rect(x,y, WHITE)
+                    self.rect(x, y, WHITE)
 
     def blank(self):
         self.screen.fill(BLACK)
 
-
-    def rect(self, x:int, y:int, color):
+    def rect(self, x: int, y: int, color):
         pg.draw.rect(
             self.screen,
             color,
