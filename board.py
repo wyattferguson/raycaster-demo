@@ -3,7 +3,7 @@ import pygame as pg
 from config import *
 
 
-class Map():
+class Board():
     def __init__(self, screen) -> None:
         self.screen = screen
         self.map = [
@@ -23,15 +23,21 @@ class Map():
     def draw(self):
         for y, row in enumerate(self.map):
             for x, tile in enumerate(row):
-                print(y, x, tile)
                 if tile:
-                    pg.draw.rect(
-                        self.screen,
-                        WHITE,
-                        pg.Rect(
-                            x * self.tile_width,
-                            y * self.tile_height,
-                            self.tile_width - self.spacer,
-                            self.tile_height - self.spacer
-                        ),
-                    )
+                    self.rect(x,y, WHITE)
+
+    def blank(self):
+        self.screen.fill(BLACK)
+
+
+    def rect(self, x:int, y:int, color):
+        pg.draw.rect(
+            self.screen,
+            color,
+            pg.Rect(
+                x * self.tile_width + self.spacer,
+                y * self.tile_height + self.spacer,
+                self.tile_width - self.spacer,
+                self.tile_height - self.spacer
+            ),
+        )

@@ -2,5 +2,14 @@
 SCREEN_SIZE = SCREEN_HEIGHT, SCREEN_WIDTH = (800, 800)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
 GREY = (84, 84, 84)
 FPS = 60
+
+
+# player
+UP = (0,-1)
+DOWN = (0,1)
+LEFT = (-1,0)
+RIGHT = (1,0)
