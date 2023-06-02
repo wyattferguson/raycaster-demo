@@ -31,11 +31,11 @@ class Player():
             elif keys[pg.K_s]:
                 direction = -self.speed
 
-            move_x = self.x + math.sin(self.angle) * direction
-            move_y = self.y + math.cos(self.angle) * direction
-            if not self.collision(move_x, move_y):
-                self.x = move_x
-                self.y = move_y
+            # Does next move hit a wall
+            dx, dy, col, row = self.xy_cast(self.x, self.y, self.angle, direction)
+            if MAP[row][col] == 0:
+                self.x = dx
+                self.y = dy
 
             # rotate player
             if keys[pg.K_a]:
@@ -45,54 +45,43 @@ class Player():
 
             self.angle %= math.tau  # wrap around angle
 
-    def collision(self, x: int, y: int) -> bool:
-        # does the next move hit a wall tile
-        next_x = x + math.sin(self.angle) * self.hit_depth
-        next_y = y + math.cos(self.angle) * self.hit_depth
-        col, row = self.xy_to_tile_coords(next_x, next_y)
-        return MAP[row][col] == 1
-
     def draw(self):
         # draw player circle
         pg.draw.circle(self.screen, RED, (self.x, self.y), self.size)
 
         # draw direction line
-        pg.draw.line(self.screen, YELLOW, (self.x, self.y), (self.x + math.sin(self.angle)
-                     * self.hit_depth, self.y + math.cos(self.angle) * self.hit_depth), 2)
+        dx, dy, *_ = self.xy_cast(self.x, self.y, self.angle, self.hit_depth)
+        pg.draw.line(self.screen, YELLOW, (self.x, self.y), (dx, dy), 2)
 
-        #  # draw player FOV cone
-        # pg.draw.line(self.screen, GREEN, (self.x, self.y),
-        #                                 (self.x + math.sin(self.angle - self.hfov) * 50,
-        #                                     self.y + math.cos(self.angle - self.hfov) * 50), 2)
-
-        # pg.draw.line(self.screen, GREEN, (self.x, self.y),
-        #                                 (self.x + math.sin(self.angle + self.hfov) * 50,
-        #                                     self.y + math.cos(self.angle + self.hfov) * 50), 2)
         self.raycaster()
 
-    def xy_to_tile_coords(self, x: int, y: int) -> tuple:
+    def xy_to_map_tiles(self, x: int, y: int) -> tuple:
+        '''convert x/y into map coordiantes'''
         col = int(x / TILE_WIDTH)
         row = int(y / TILE_HEIGHT)
         return col, row
 
+    def xy_cast(self, x: int, y: int, angle: float, depth: float) -> tuple:
+        '''calculate x/y position into the world'''
+        new_x = x + math.sin(angle) * depth
+        new_y = y + math.cos(angle) * depth
+        tile_col, tile_row = self.xy_to_map_tiles(new_x, new_y)
+        return (new_x, new_y, tile_col, tile_row)
+
     def raycaster(self):
-        # start at left side of cone
-        start_angle = self.angle - self.hfov
+        # start at left side of the FOV cone
+        cast_angle = self.angle - self.hfov
 
         for ray in range(self.rays):
             for depth in range(self.view_depth):
 
-                # get ray target coordinates
-                target_x = self.x + math.sin(start_angle) * depth
-                target_y = self.y + math.cos(start_angle) * depth
-
-                # covert target X, Y coordinate to map col, row
-                col, row = self.xy_to_tile_coords(target_x, target_y)
+                dx, dy, col, row = self.xy_cast(self.x, self.y, cast_angle, depth)
 
                 # ray hits a map wall
                 if MAP[row][col] == 1:
                     # draw casted ray
-                    pg.draw.line(self.screen, GREEN, (self.x, self.y), (target_x, target_y))
+                    pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
                     break
 
-            start_angle += self.step_angle
+            # move across the POV arc
+            cast_angle += self.step_angle
