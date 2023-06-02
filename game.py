@@ -21,17 +21,17 @@ class Game():
     def run(self):
 
         while self.running:
+            self.update()
+            self.player.update()
             self.board.blank()
             self.board.draw()
-            self.keyboard()
-            self.player.move()
             self.player.draw()
             pg.display.update()
             self.clock.tick(FPS)
 
         pg.quit()
 
-    def keyboard(self):
+    def update(self):
         for event in pg.event.get():
             if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.running = False
