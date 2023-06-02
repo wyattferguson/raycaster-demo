@@ -25,9 +25,9 @@ class Board():
             self.screen,
             color,
             pg.Rect(
-                x * TILE_SIZE + self.tile_spacer,
-                y * TILE_SIZE +  self.tile_spacer,
-                TILE_SIZE -  self.tile_spacer,
-                TILE_SIZE -  self.tile_spacer
+                x * TILE_WIDTH + self.tile_spacer,
+                y * TILE_HEIGHT + self.tile_spacer,
+                TILE_WIDTH - self.tile_spacer,
+                TILE_HEIGHT - self.tile_spacer
             ),
         )
