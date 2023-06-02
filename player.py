@@ -51,14 +51,14 @@ class Player():
                      (self.x, self.y),
                      (self.x + math.sin(self.angle) * 50, self.y + math.cos(self.angle) * 50), 2)
 
-         # draw player FOV cone
-        pg.draw.line(self.screen, GREEN, (self.x, self.y),
-                                        (self.x + math.sin(self.angle - self.hfov) * 50,
-                                            self.y + math.cos(self.angle - self.hfov) * 50), 2)
+        #  # draw player FOV cone
+        # pg.draw.line(self.screen, GREEN, (self.x, self.y),
+        #                                 (self.x + math.sin(self.angle - self.hfov) * 50,
+        #                                     self.y + math.cos(self.angle - self.hfov) * 50), 2)
 
-        pg.draw.line(self.screen, GREEN, (self.x, self.y),
-                                        (self.x + math.sin(self.angle + self.hfov) * 50,
-                                            self.y + math.cos(self.angle + self.hfov) * 50), 2)
+        # pg.draw.line(self.screen, GREEN, (self.x, self.y),
+        #                                 (self.x + math.sin(self.angle + self.hfov) * 50,
+        #                                     self.y + math.cos(self.angle + self.hfov) * 50), 2)
         self.raycaster()
 
 
