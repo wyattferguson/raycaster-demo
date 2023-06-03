@@ -1,6 +1,6 @@
 # pygame settings
 FPS = 30
-SCREEN_SIZE = SCREEN_HEIGHT, SCREEN_WIDTH = (800, 800)
+SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = (800, 600)
 
 # colors
 WHITE = (255, 255, 255)
@@ -23,6 +23,6 @@ MAP = [
     [1, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1]
 ]
-
-TILE_HEIGHT = SCREEN_HEIGHT // len(MAP)
-TILE_WIDTH = SCREEN_WIDTH // len(MAP[0])
+SCALER = 2
+TILE_SIZE = 10 * SCALER
+MAP_HEIGHT = len(MAP) * TILE_SIZE

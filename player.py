@@ -7,17 +7,17 @@ from config import *
 
 class Player():
     def __init__(self, screen) -> None:
-        self.speed = 5
-        self.x = SCREEN_WIDTH // 2
-        self.y = SCREEN_HEIGHT // 2
+        self.speed = SCALER
+        self.x = (TILE_SIZE * 4) + (TILE_SIZE / 2)
+        self.y = (TILE_SIZE * 4) + (TILE_SIZE / 2)
         self.angle = math.pi  # face straight up
         self.rot_speed = 0.075
-        self.size = 10
-        self.hit_depth = self.size + 4
-        self.view_depth = SCREEN_HEIGHT
+        self.size = 2.5 * SCALER
+        self.hit_depth = self.size + self.speed
+        self.view_depth = MAP_HEIGHT
         self.fov = math.pi / 3
         self.hfov = self.fov / 2
-        self.rays = 120
+        self.rays = 60
         self.step_angle = self.fov / self.rays
         self.screen = screen
 
@@ -57,8 +57,8 @@ class Player():
 
     def xy_to_map_tiles(self, x: int, y: int) -> tuple:
         '''convert x/y into map coordiantes'''
-        col = int(x / TILE_WIDTH)
-        row = int(y / TILE_HEIGHT)
+        col = int(x / TILE_SIZE)
+        row = int(y / TILE_SIZE)
         return col, row
 
     def xy_cast(self, x: int, y: int, angle: float, depth: float) -> tuple:
