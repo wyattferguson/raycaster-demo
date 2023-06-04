@@ -7,7 +7,7 @@ class Board():
     def __init__(self, screen) -> None:
         self.screen = screen
         self.map = MAP
-        self.tile_spacer = 2
+        self.tile_spacer = SCALER / 2
 
 
     def draw(self):
@@ -18,6 +18,23 @@ class Board():
 
     def blank(self):
         self.screen.fill(BLACK)
+
+        # draw sky
+        pg.draw.rect(self.screen, BLACK, pg.Rect(
+                MAP_SIZE + 5,
+                0,
+                SCREEN_WIDTH - MAP_SIZE,
+                SCREEN_HEIGHT / 2,
+            ))
+
+        # draw floor
+        pg.draw.rect(self.screen, BROWN, pg.Rect(
+                MAP_SIZE + 5,
+                SCREEN_HEIGHT / 2,
+                SCREEN_WIDTH - MAP_SIZE,
+                SCREEN_HEIGHT / 2,
+            ))
+
 
     def tile(self, x: int, y: int, color):
         pg.draw.rect(

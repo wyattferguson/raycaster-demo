@@ -14,10 +14,11 @@ class Player():
         self.rot_speed = 0.075
         self.size = 2.5 * SCALER
         self.hit_depth = self.size + self.speed
-        self.view_depth = MAP_HEIGHT
+        self.view_depth = MAP_SIZE
         self.fov = math.pi / 3
         self.hfov = self.fov / 2
-        self.rays = 60
+        self.rays = 120
+        self.wall_scale = (SCREEN_WIDTH - MAP_SIZE) / self.rays
         self.step_angle = self.fov / self.rays
         self.screen = screen
 
@@ -81,6 +82,26 @@ class Player():
                 if MAP[row][col] == 1:
                     # draw casted ray
                     pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
+
+                    # fix fish eye effect
+                    depth *= math.cos(self.angle - cast_angle)
+
+                    wall_height = 21000 / (depth + 0.0001)
+
+                    # fix stuck at the wall
+                    if wall_height > SCREEN_HEIGHT: wall_height = SCREEN_HEIGHT
+
+                    # wall shading
+                    color = 255 / (1 + depth * depth * 0.0001)
+
+                    # draw 3D projection (left, top, width, height)
+                    pg.draw.rect(self.screen, (color,color,color), (
+                        SCREEN_WIDTH - ray * self.wall_scale,
+                        (SCREEN_HEIGHT / 2) - wall_height / 2,
+                        self.wall_scale + 1,
+                        wall_height
+                    ))
+
                     break
 
             # move across the POV arc

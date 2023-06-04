@@ -22,10 +22,10 @@ class Game():
 
         while self.running:
             self.update()
-            self.player.update()
             self.board.blank()
             self.board.draw()
             self.player.draw()
+            self.player.update()
             pg.display.update()
             self.clock.tick(FPS)
 
