@@ -47,10 +47,10 @@ class Player():
             self.angle %= math.tau  # wrap around angle
 
     def draw(self):
-        # draw player circle
+        # draw player circle on mini map
         pg.draw.circle(self.screen, RED, (self.x, self.y), self.size)
 
-        # draw direction line
+        # draw direction line on mini map
         dx, dy, *_ = self.xy_cast(self.x, self.y, self.angle, self.hit_depth)
         pg.draw.line(self.screen, YELLOW, (self.x, self.y), (dx, dy), 2)
 
@@ -81,7 +81,7 @@ class Player():
                 # ray hits a map wall
                 if MAP[row][col] == 1:
 
-                    # draw casted ray
+                    # draw casted ray on minimap
                     # pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
 
                     # fix fish eye effect

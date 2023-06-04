@@ -11,12 +11,14 @@ class Board():
 
 
     def draw(self):
+        '''Draw mini map'''
         for y, row in enumerate(self.map):
             for x, tile in enumerate(row):
                 if tile:
                     self.tile(x, y, WHITE)
 
     def blank(self):
+        '''refresh screen'''
         self.screen.fill(BLACK)
 
         # draw sky
@@ -37,6 +39,7 @@ class Board():
 
 
     def tile(self, x: int, y: int, color):
+        '''draw single mini map tile'''
         pg.draw.rect(
             self.screen,
             color,
