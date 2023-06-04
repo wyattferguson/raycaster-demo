@@ -82,7 +82,7 @@ class Player():
                 if MAP[row][col] == 1:
 
                     # draw casted ray on minimap
-                    # pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
+                    pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
 
                     # fix fish eye effect
                     depth *= math.cos(self.angle - cast_angle)
@@ -96,12 +96,13 @@ class Player():
                     color = 255 / (1 + depth * depth * 0.0001)
 
                     # draw 3D projection (left, top, width, height)
-                    pg.draw.rect(self.screen, (color,color,color), (
+                    wall_rect = (
                         SCREEN_WIDTH - ray * self.wall_scale,
                         (SCREEN_HEIGHT / 2) - wall_height / 2,
                         self.wall_scale + 1,
                         wall_height
-                    ))
+                    )
+                    pg.draw.rect(self.screen, (color,color,color), wall_rect)
 
                     break
 
