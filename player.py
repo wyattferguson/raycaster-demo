@@ -9,7 +9,7 @@ class Player():
     def __init__(self, screen) -> None:
         self.speed = SCALER
         self.x = (TILE_SIZE * 4) + (TILE_SIZE / 2)
-        self.y = (TILE_SIZE * 4) + (TILE_SIZE / 2)
+        self.y = (TILE_SIZE * 3) + (TILE_SIZE / 2)
         self.angle = math.pi  # face straight up
         self.rot_speed = 0.075
         self.size = 2.5 * SCALER
@@ -17,7 +17,7 @@ class Player():
         self.view_depth = MAP_SIZE
         self.fov = math.pi / 3
         self.hfov = self.fov / 2
-        self.rays = 120
+        self.rays = 100
         self.wall_scale = (SCREEN_WIDTH - MAP_SIZE) / self.rays
         self.step_angle = self.fov / self.rays
         self.screen = screen
@@ -80,8 +80,9 @@ class Player():
 
                 # ray hits a map wall
                 if MAP[row][col] == 1:
+
                     # draw casted ray
-                    pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
+                    # pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
 
                     # fix fish eye effect
                     depth *= math.cos(self.angle - cast_angle)
@@ -91,7 +92,7 @@ class Player():
                     # fix stuck at the wall
                     if wall_height > SCREEN_HEIGHT: wall_height = SCREEN_HEIGHT
 
-                    # wall shading
+                    # wall shading dending on distance
                     color = 255 / (1 + depth * depth * 0.0001)
 
                     # draw 3D projection (left, top, width, height)
