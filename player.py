@@ -90,7 +90,8 @@ class Player():
                     wall_height = 21000 / (depth + 0.0001)
 
                     # fix stuck at the wall
-                    if wall_height > SCREEN_HEIGHT: wall_height = SCREEN_HEIGHT
+                    if wall_height > SCREEN_HEIGHT:
+                        wall_height = SCREEN_HEIGHT
 
                     # wall shading dending on distance
                     color = 255 / (1 + depth * depth * 0.0001)
@@ -102,7 +103,7 @@ class Player():
                         self.wall_scale + 1,
                         wall_height
                     )
-                    pg.draw.rect(self.screen, (color,color,color), wall_rect)
+                    pg.draw.rect(self.screen, (color, color, color), wall_rect)
 
                     break
 
