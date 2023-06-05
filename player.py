@@ -2,7 +2,8 @@ import math
 
 import pygame as pg
 
-from config import *
+from config import (MAP, MAP_SIZE, SCALER, SCREEN_HEIGHT, SCREEN_WIDTH,
+                    TILE_SIZE, WALL_SCALER)
 
 
 class Player():
@@ -10,7 +11,7 @@ class Player():
         self.speed = SCALER
         self.x = (TILE_SIZE * 4) + (TILE_SIZE / 2)
         self.y = (TILE_SIZE * 3) + (TILE_SIZE / 2)
-        self.angle = math.pi  # face straight up
+        self.angle = math.pi / 2
         self.rot_speed = 0.075
         self.size = 2.5 * SCALER
         self.hit_depth = self.size + self.speed
@@ -48,11 +49,11 @@ class Player():
 
     def draw(self):
         # draw player circle on mini map
-        pg.draw.circle(self.screen, RED, (self.x, self.y), self.size)
+        pg.draw.circle(self.screen, pg.Color('red'), (self.x, self.y), self.size)
 
         # draw direction line on mini map
         dx, dy, *_ = self.xy_cast(self.x, self.y, self.angle, self.hit_depth)
-        pg.draw.line(self.screen, YELLOW, (self.x, self.y), (dx, dy), 2)
+        pg.draw.line(self.screen, pg.Color('yellow'), (self.x, self.y), (dx, dy), 2)
 
         self.raycaster()
 
@@ -82,7 +83,7 @@ class Player():
                 if MAP[row][col] == 1:
 
                     # draw casted ray on minimap
-                    pg.draw.line(self.screen, GREEN, (self.x, self.y), (dx, dy))
+                    pg.draw.line(self.screen, pg.Color('green'), (self.x, self.y), (dx, dy))
 
                     # fix fish eye effect
                     depth *= math.cos(self.angle - cast_angle)

@@ -1,44 +1,22 @@
 import pygame as pg
 
-from config import *
+from config import MAP, SCALER, TILE_SIZE
 
 
-class Board():
+class MiniMap():
     def __init__(self, screen) -> None:
         self.screen = screen
         self.map = MAP
         self.tile_spacer = SCALER / 2
-
 
     def draw(self):
         '''Draw mini map'''
         for y, row in enumerate(self.map):
             for x, tile in enumerate(row):
                 if tile:
-                    self.tile(x, y, WHITE)
+                    self.tile(x, y, pg.Color("white"))
 
-    def blank(self):
-        '''refresh screen'''
-        self.screen.fill(BLACK)
-
-        # draw sky
-        pg.draw.rect(self.screen, BLACK, pg.Rect(
-                MAP_SIZE + 5,
-                0,
-                SCREEN_WIDTH - MAP_SIZE,
-                SCREEN_HEIGHT / 2,
-            ))
-
-        # draw floor
-        pg.draw.rect(self.screen, BROWN, pg.Rect(
-                MAP_SIZE + 5,
-                SCREEN_HEIGHT / 2,
-                SCREEN_WIDTH - MAP_SIZE,
-                SCREEN_HEIGHT / 2,
-            ))
-
-
-    def tile(self, x: int, y: int, color):
+    def tile(self, x: int, y: int, color: pg.Color):
         '''draw single mini map tile'''
         pg.draw.rect(
             self.screen,

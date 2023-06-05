@@ -1,8 +1,7 @@
 import pygame as pg
 
-from board import Board
-from config import *
-from player import Player
+from config import FPS, SCREEN_SIZE
+from scene import Scene
 
 
 class Game():
@@ -13,19 +12,17 @@ class Game():
 
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode(SCREEN_SIZE)
-        self.screen.fill(BLACK)
+
         self.running = True
-        self.player = Player(self.screen)
-        self.board = Board(self.screen)
+        self.scene = Scene(self.screen)
 
     def run(self):
 
         while self.running:
+            self.scene.blank()
             self.update()
-            self.board.blank()
-            self.board.draw()
-            self.player.draw()
-            self.player.update()
+            self.scene.update()
+            self.scene.draw()
             pg.display.update()
             self.clock.tick(FPS)
 
