@@ -17,7 +17,7 @@ class Player():
         self.view_depth = MAP_SIZE
         self.fov = math.pi / 3
         self.hfov = self.fov / 2
-        self.rays = 100
+        self.rays = 120
         self.wall_scale = (SCREEN_WIDTH - MAP_SIZE) / self.rays
         self.step_angle = self.fov / self.rays
         self.screen = screen
@@ -87,7 +87,7 @@ class Player():
                     # fix fish eye effect
                     depth *= math.cos(self.angle - cast_angle)
 
-                    wall_height = 21000 / (depth + 0.0001)
+                    wall_height = (SCREEN_HEIGHT / depth) * WALL_SCALER
 
                     # fix stuck at the wall
                     if wall_height > SCREEN_HEIGHT:
