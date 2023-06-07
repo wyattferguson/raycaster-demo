@@ -17,7 +17,7 @@ This is just a simple proof of concept and would need a good refactor before bei
 
 Created by [Wyatt Ferguson](@wyattxdev@mastodon.social)
 
-For any comments or questions message me on [Mastodon](@wyattxdev@mastodon.social) your can email me at [wyattxdev@duck.com](wyattxdev@duck.com)
+For any comments or questions message me on [Mastodon](@wyattxdev@mastodon.social)
 
 [:coffee: Buy Me A Coffee](https://www.buymeacoffee.com/wyattferguson)
 
