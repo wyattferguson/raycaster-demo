@@ -17,10 +17,9 @@ This is just a simple proof of concept and would need a good refactor before bei
 
 Created by [Wyatt Ferguson](https://twitter.com/wyattxdev)
 
-For any questions or comments you can send them to me on my socials:
-### :shaved_ice: Follow on [Mastodon @wyattxdev@mastodon.social](@wyattxdev@mastodon.social)
+For any questions or comments heres how you can reach me:
+### :shaved_ice: Follow on [BlueSky @wyattf](wyattf.bsky.social)
 ### :tropical_drink: Follow on [Twitter @wyattxdev](https://twitter.com/wyattxdev)
-
 
 If you find this useful and want to tip me a little coffee money:
 ### :coffee: [Buy Me A Coffee](https://www.buymeacoffee.com/wyattferguson)
