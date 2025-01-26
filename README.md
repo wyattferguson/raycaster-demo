@@ -13,16 +13,38 @@ This is just a simple proof of concept and would need a good refactor before bei
 - A - Rotate Left
 - D - Rotate Right
 
+## Installation & How To Use
+
+Installation is pretty straight forward, Im using [UV](https://docs.astral.sh/uv/) to manage everything.
+
+To get it all running from scratch:
+
+```
+# spin up a virtual enviroment
+uv venv
+
+# activate virtual enviroment
+.venv\Scripts\activate
+
+# install all the cool dependancies
+uv sync
+
+# use taskipy to simplify running everything
+task run
+```
+
 ## :postbox: Contact & Support
 
 Created by [Wyatt Ferguson](https://twitter.com/wyattxdev)
 
 For any questions or comments heres how you can reach me:
+
 ### :mailbox_with_mail: Email me at [wyattxdev@duck.com](wyattxdev@duck.com)
+
 ### :shaved_ice: Follow on [BlueSky @wyattf](wyattf.bsky.social)
-### :tropical_drink: Follow on [Twitter @wyattxdev](https://twitter.com/wyattxdev)
 
 If you find this useful and want to tip me a little coffee money:
+
 ### :coffee: [Buy Me A Coffee](https://www.buymeacoffee.com/wyattferguson)
 
 <br>
