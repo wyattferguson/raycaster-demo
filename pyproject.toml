@@ -17,7 +17,7 @@ run = "uv run ./src/game.py"
 
 [tool.ruff]
 line-length = 120
-indent-width = 2
+indent-width = 1
 format.indent-style = "tab"
 target-version = "py312"
 
