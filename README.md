@@ -33,7 +33,7 @@ uv sync
 task run
 ```
 
-## :postbox: Contact & Support
+## Contact & Support
 
 Created by [Wyatt Ferguson](https://github.com/wyattferguson)
 
