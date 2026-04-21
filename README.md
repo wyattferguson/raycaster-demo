@@ -2,9 +2,9 @@
 
 # :tv: Raycaster Python Demo
 
-A simple demo of a 2D raycaster (think Wolfenstein 3D). By giving the caster only a 2d list it will render it into 3d, by casting rays out from the players POV and using that distance to calculate the hieght of each ractangle to draw.
+A demo of a Wolfenstein 3D style 2D raycaster. By giving the caster only a 2d list it will render it into 3d, by casting rays out from the players POV and using that distance to calculate the hieght of each ractangle to draw.
 
-This is just a simple proof of concept and would need a good refactor before being used in prime time.
+This is just a proof of concept and could use a good refactor before its expanded upon.
 
 ## Controls
 
@@ -12,6 +12,7 @@ This is just a simple proof of concept and would need a good refactor before bei
 - S - Backwards
 - A - Rotate Left
 - D - Rotate Right
+- ESC - Exit
 
 ## Installation & How To Use
 
@@ -19,7 +20,7 @@ Installation is pretty straight forward, Im using [UV](https://docs.astral.sh/uv
 
 To get it all running from scratch:
 
-```
+```bash
 # spin up a virtual enviroment
 uv venv
 
@@ -40,9 +41,11 @@ Created by [Wyatt Ferguson](https://github.com/wyattferguson)
 For any questions or comments heres how you can reach me:
 
 ### :octocat: Follow me on [Github @wyattferguson](https://github.com/wyattferguson)
+
 ### :mailbox_with_mail: Email me at [wyattxdev@duck.com](wyattxdev@duck.com)
+
 ### :tropical_drink: Follow on [BlueSky @wyattf](https://wyattf.bsky.social)
 
-
 If you find this useful and want to tip me a little coffee money:
+
 ### :coffee: [Buy Me A Coffee](https://www.buymeacoffee.com/wyattferguson)
