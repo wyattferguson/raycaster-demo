@@ -8,9 +8,6 @@ class MiniMap:
 
     def __init__(self) -> None:
         self.surface = pg.display.get_surface()
-        if self.surface is None:
-            msg = "Display surface was not initialized before MiniMap creation."
-            raise RuntimeError(msg)
         self.map = MAP
         self.tile_spacer = SCALER / 2
 
