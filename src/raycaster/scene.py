@@ -1,8 +1,8 @@
 import pygame as pg
 
-from config import HALF_HEIGHT, SCENE_WIDTH, SCENE_X
-from minimap import MiniMap
-from player import Player
+from raycaster.config import HALF_HEIGHT, SCENE_WIDTH, SCENE_X
+from raycaster.minimap import MiniMap
+from raycaster.player import Player
 
 
 class Scene:
@@ -11,8 +11,8 @@ class Scene:
         self.mini_map = MiniMap(screen)
         self.objects = [Player(self.screen)]
 
-    def blank(self):
-        """refresh screen"""
+    def blank(self) -> None:
+        """Refresh screen."""
         self.screen.fill(pg.Color("black"))
 
         self.mini_map.draw()
@@ -41,10 +41,10 @@ class Scene:
             ),
         )
 
-    def update(self):
+    def update(self) -> None:
         for obj in self.objects:
             obj.update()
 
-    def draw(self):
+    def draw(self) -> None:
         for obj in self.objects:
             obj.draw()

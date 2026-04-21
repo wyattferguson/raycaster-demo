@@ -1,7 +1,8 @@
 [project]
-name = "wolf3d"
+name = "raycaster"
 version = "0.1.0"
-description = "A simple demo of a 2D raycaster (think Wolfenstein 3D)"
+license = { file = "LICENSE" }
+description = "A simple demo of a Wolfenstein 3D style raycaster."
 authors = [{ name = "Wyatt Ferguson", email = "wyattf@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
@@ -9,24 +10,110 @@ dependencies = [
     "pygame>=2.6.1",
 ]
 
-[tool.taskipy.tasks]
-format = "ruff format ./src/"
-lint = "ruff check --fix ./src/"
-test = "pytest tests"
-run = "uv run ./src/game.py"
-
-[tool.ruff]
-line-length = 120
-indent-width = 4
-format.indent-style = "space"
-target-version = "py312"
+[dependency-groups]
+dev = [
+    "ty>=0.0.17",
+    "pytest>=9.0.2",
+    "ruff>=0.15.1",
+    "taskipy>=1.14.1",
+]
 
 [tool.uv]
 package = false
 
-[dependency-groups]
-dev = [
-    "pytest>=8.3.4",
-    "ruff>=0.9.3",
-    "taskipy>=1.14.1",
+[project.urls]
+homepage = "https://github.com/wyattferguson/raycaster-demo"
+repository = "https://github.com/wyattferguson/raycaster-demo.git"
+documentation = "https://github.com/wyattferguson/raycaster-demo"
+issues = "https://github.com/wyattferguson/raycaster-demo/issues"
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.hatch]
+build.targets.wheel.packages = ["raycaster"]
+
+[tool.taskipy.tasks]
+format = {cmd = "ruff format ./src ./tests", help = "Format code using ruff"}
+lint = {cmd = "ruff check --fix ./src ./tests", help = "Lint and auto-fix code using ruff"}
+type = {cmd = "ty check", help = "Typecheck code using ty" }
+tests = {cmd = "pytest --verbose -s --color=yes tests", help = "Run tests using pytest"}
+run = {cmd = "uv run ./src/raycaster/game.py", help = "Run the raycaster demo"}
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+target-version = "py312"
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    "build",
+    "dist",
+    "*.egg-info",
+    "htmlcov",
+    ".cache",
 ]
+
+[tool.ruff.lint]
+pydocstyle.convention = "google"
+fixable = ["ALL"]
+select = ["ALL"]
+ignore = [
+    "FA102",    # Flake8-future-annotations
+    "F401",     # Disable fix for unused imports
+    "B904",     # Allow raising exceptions without from e
+    "PLR0913",  # too many arguments
+    "CPY",      # Flake8-copyright
+    "T201",     # Debugging print statements
+    "ERA",      # Eradicate – detects commented-out code
+    "BLE001",   # Catch-all exceptions
+    "D100",     # missing docstring in public module
+    "D105",     # undocumented magic method
+    "D107",     # undocumented public init
+    "D203",     # incorrect-blank-line-before-class
+    "D205",     # line-between-summary-and-description
+    "D212",     # multi-line-summary-first-line
+    "D400",     # missing-trailing-period
+    "D407",     # missing-dashed-underline-after-section
+    "S311",     # rand-usage
+    "EM102",    # f-string-exception
+    "EM101",    # implicit-str-concatenation
+    "TRY003",   # long-exception-messages
+    "FBT003",   # bool argument in function call
+    "FBT002",   # bool argument in lambda
+    "FBT001",   # bool argument in function definition
+    "PLR2004",  # Magic values
+    "FIX002",   # TODOs can hang out
+    "TD002",    # missing todo authoer
+    "TD003",    # missing todo link
+    "TC001",    # move import into type-checking block
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "PLC0415",  # Import outside top-level (tests often need scoped imports)
+    "PLR2004",  # Magic values
+    "PT001",    # Use @pytest.fixture() over @pytest.fixture
+    "S101",     # Use of assert detected
+    "D101",     # Missing docstring in public class
+    "D103",     # Missing docstring in public function
+    "E741",     # Ambiguous variable name 'l', 'O', or 'I'
+]
+
+[tool.ty]
+terminal.output-format = "full"
+
+[tool.ty.environment]
+python = ".venv"
+
+[tool.ty.src]
+include = ["src/**/*.py","tests/**/*.py"]

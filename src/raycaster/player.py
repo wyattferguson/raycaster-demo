@@ -2,7 +2,15 @@ import math
 
 import pygame as pg
 
-from config import MAP, MAP_SIZE, SCALER, SCREEN_HEIGHT, SCREEN_WIDTH, TILE_SIZE, WALL_SCALER
+from raycaster.config import (
+    MAP,
+    MAP_SIZE,
+    SCALER,
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    TILE_SIZE,
+    WALL_SCALER,
+)
 
 
 class Player:
@@ -22,7 +30,7 @@ class Player:
         self.step_angle = self.fov / self.rays
         self.screen = screen
 
-    def update(self):
+    def update(self) -> None:
         keys = pg.key.get_pressed()
         if keys:
             direction = 0
@@ -46,7 +54,7 @@ class Player:
 
             self.angle %= math.tau  # wrap around angle
 
-    def draw(self):
+    def draw(self) -> None:
         # draw player circle on mini map
         pg.draw.circle(self.screen, pg.Color("red"), (self.x, self.y), self.size)
 
@@ -56,20 +64,20 @@ class Player:
 
         self.raycaster()
 
-    def xy_to_map_tiles(self, x: int, y: int) -> tuple:
-        """convert x/y into map coordiantes"""
+    def xy_to_map_tiles(self, x: float, y: float) -> tuple[int, int]:
+        """Convert x/y into map coordinates."""
         col = int(x / TILE_SIZE)
         row = int(y / TILE_SIZE)
         return col, row
 
-    def xy_cast(self, x: int, y: int, angle: float, depth: float) -> tuple:
-        """calculate x/y position into the world"""
+    def xy_cast(self, x: int, y: int, angle: float, depth: float) -> tuple[float, float, int, int]:
+        """Calculate x/y position into the world."""
         new_x = x + math.sin(angle) * depth
         new_y = y + math.cos(angle) * depth
         tile_col, tile_row = self.xy_to_map_tiles(new_x, new_y)
         return (new_x, new_y, tile_col, tile_row)
 
-    def raycaster(self):
+    def raycaster(self) -> None:
         # start at left side of the FOV cone
         cast_angle = self.angle - self.hfov
 
@@ -88,8 +96,7 @@ class Player:
                     wall_height = (SCREEN_HEIGHT / depth) * WALL_SCALER
 
                     # fix stuck at the wall
-                    if wall_height > SCREEN_HEIGHT:
-                        wall_height = SCREEN_HEIGHT
+                    wall_height = min(wall_height, SCREEN_HEIGHT)
 
                     # wall shading dending on distance
                     shading = 255 / (1 + depth * depth * 0.0001)

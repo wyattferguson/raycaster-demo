@@ -1,10 +1,12 @@
 import pygame as pg
 
-from config import FPS, SCREEN_SIZE
-from scene import Scene
+from raycaster.config import FPS, SCREEN_SIZE
+from raycaster.scene import Scene
 
 
 class Game:
+    """Main game loop."""
+
     def __init__(self) -> None:
         pg.init()
         pg.display.set_caption("Wolf3D Game")
@@ -15,7 +17,12 @@ class Game:
         self.running = True
         self.scene = Scene(self.screen)
 
-    def run(self):
+    def update(self) -> None:
+        for event in pg.event.get():
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                self.running = False
+
+    def run(self) -> None:
         while self.running:
             self.scene.blank()
             self.update()
@@ -25,11 +32,6 @@ class Game:
             self.clock.tick(FPS)
 
         pg.quit()
-
-    def update(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-                self.running = False
 
 
 if __name__ == "__main__":
