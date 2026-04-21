@@ -9,23 +9,24 @@ class Game:
 
     def __init__(self) -> None:
         pg.init()
-        pg.display.set_caption("Wolf3D Game")
+        pg.display.set_caption("Raycaster Demo")
+        pg.display.set_mode(SCREEN_SIZE)
 
         self.clock = pg.time.Clock()
-        self.screen = pg.display.set_mode(SCREEN_SIZE)
-
         self.running = True
-        self.scene = Scene(self.screen)
+        self.scene = Scene()
 
-    def update(self) -> None:
+    def _process_events(self) -> None:
+        """Handle close and quit-related key events."""
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 self.running = False
 
     def run(self) -> None:
+        """Run the game loop until a quit event occurs."""
         while self.running:
             self.scene.blank()
-            self.update()
+            self._process_events()
             self.scene.update()
             self.scene.draw()
             pg.display.update()
@@ -34,6 +35,11 @@ class Game:
         pg.quit()
 
 
+def main() -> None:
+    """Start raycaster demo."""
+    game = Game()
+    game.run()
+
+
 if __name__ == "__main__":
-    app = Game()
-    app.run()
+    main()

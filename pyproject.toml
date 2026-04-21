@@ -3,7 +3,7 @@ name = "raycaster"
 version = "0.1.0"
 license = { file = "LICENSE" }
 description = "A simple demo of a Wolfenstein 3D style raycaster."
-authors = [{ name = "Wyatt Ferguson", email = "wyattf@gmail.com" }]
+authors = [{ name = "Wyatt Ferguson", email =  "wyattxdev@duck.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -18,9 +18,6 @@ dev = [
     "taskipy>=1.14.1",
 ]
 
-[tool.uv]
-package = false
-
 [project.urls]
 homepage = "https://github.com/wyattferguson/raycaster-demo"
 repository = "https://github.com/wyattferguson/raycaster-demo.git"
@@ -28,11 +25,8 @@ documentation = "https://github.com/wyattferguson/raycaster-demo"
 issues = "https://github.com/wyattferguson/raycaster-demo/issues"
 
 [build-system]
-requires = ["uv_build"]
+requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
-
-[tool.hatch]
-build.targets.wheel.packages = ["raycaster"]
 
 [tool.taskipy.tasks]
 format = {cmd = "ruff format ./src ./tests", help = "Format code using ruff"}
@@ -116,4 +110,4 @@ terminal.output-format = "full"
 python = ".venv"
 
 [tool.ty.src]
-include = ["src/**/*.py","tests/**/*.py"]
+include = ["src/raycaster/**/*.py","tests/**/*.py"]
