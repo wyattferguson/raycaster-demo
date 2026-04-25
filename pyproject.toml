@@ -33,7 +33,7 @@ format = {cmd = "ruff format ./src ./tests", help = "Format code using ruff"}
 lint = {cmd = "ruff check --fix ./src ./tests", help = "Lint and auto-fix code using ruff"}
 type = {cmd = "ty check", help = "Typecheck code using ty" }
 tests = {cmd = "pytest --verbose -s --color=yes tests", help = "Run tests using pytest"}
-run = {cmd = "uv run ./src/raycaster/game.py", help = "Run the raycaster demo"}
+run = {cmd = "uv run python -m raycaster.game", help = "Run the raycaster demo"}
 
 [tool.ruff]
 line-length = 100

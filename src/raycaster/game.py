@@ -1,7 +1,7 @@
 import pygame as pg
 
-from raycaster.config import FPS, SCREEN_SIZE
-from raycaster.scene import Scene
+from .config import FPS, SCREEN_SIZE
+from .scene import Scene
 
 
 class Game:

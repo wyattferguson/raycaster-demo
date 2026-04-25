@@ -1,8 +1,9 @@
 import pygame as pg
 
-from raycaster.config import HALF_HEIGHT, SCENE_WIDTH, SCENE_X
-from raycaster.minimap import MiniMap
-from raycaster.player import Player
+from .config import HALF_HEIGHT, SCENE_WIDTH, SCENE_X
+from .minimap import MiniMap
+from .player import Player
+from .raycaster import Raycaster
 
 
 class Scene:
@@ -10,8 +11,11 @@ class Scene:
 
     def __init__(self) -> None:
         self.surface = pg.display.get_surface()
-        self.mini_map = MiniMap()
-        self.objects: list[Player] = [Player()]
+
+        self.player = Player()
+        self.raycaster = Raycaster(self.player)
+        self.mini_map = MiniMap(self.player)
+        self.objects: list = [self.player]
 
     def _draw_background(self) -> None:
         """Draw static sky/floor panels for the 3D viewport."""
@@ -40,7 +44,6 @@ class Scene:
     def blank(self) -> None:
         """Refresh screen."""
         self.surface.fill(pg.Color("black"))
-        self.mini_map.draw()
         self._draw_background()
 
     def update(self) -> None:
@@ -49,6 +52,8 @@ class Scene:
             obj.update()
 
     def draw(self) -> None:
-        """Draw all dynamic scene objects."""
+        """Draw everything in the scene."""
+        self.raycaster.draw()
+        self.mini_map.draw()
         for obj in self.objects:
             obj.draw()
